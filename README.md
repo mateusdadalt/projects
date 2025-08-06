@@ -16,8 +16,8 @@ This setup allows Power BI to connect and refresh the lead database whenever nee
 
 Both nº1 and nº2 steps happen within RD Station, where the webhook triggers send the request to start Power Automate flow. The following steps happen in Power Automate. 
 
-Trigger 1 - User subscription triggers the webhook flow
-Action 2 - An HTTP request is sent to the defined URL
+Trigger 1 - User subscription triggers the webhook flow /n
+Action 2 - An HTTP request is sent to the defined URL /n
 Trigger 3 -
 Action 4 -
 Action 5 -
