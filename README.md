@@ -10,3 +10,5 @@ The company launched a marketing campaing for an educational course. A subscript
 RD Station sends lead data via *webhook (push method)*, while Power BI queries data sources using a *pull method*. Therefore, an automated flow was created in *Power Automate* to receive, filter and transform webhook data. Then, the processed data is stored in a JSON file within a *Sharepoint* folder. Sharepoint was chosen as the storage layer because the company didn't provided a data warehouse or a data lake access.
 
 This setup allows Power BI to connect and refresh the lead database whenever needed without requiring any external services or custom APIs.
+
+![Automated flow](./README/images/AutomatedFlow.png)
