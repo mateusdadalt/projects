@@ -11,4 +11,20 @@ RD Station sends lead data via *webhook (push method)*, while Power BI queries d
 
 This setup allows Power BI to connect and refresh the lead database whenever needed without requiring any external services or custom APIs.
 
+##### Automated flow schema
 ![Automated flow](./README/images/AutomatedFlow.png)
+
+Both nº1 and nº2 steps happen within RD Station, where the webhook triggers send the request to start Power Automate flow. The following steps happen in Power Automate. 
+
+Trigger 1 - User subscription triggers the webhook flow
+Action 2 - An HTTP request is sent to the defined URL
+Trigger 3 -
+Action 4 -
+Action 5 -
+Action 6 -
+Action 7 -
+Action 8 -
+Action 9 -
+Action 10 -
+
+Power Automate URL are created after the first time it is saved.
