@@ -27,4 +27,6 @@ Action 8 -  Update Database variable adding the new lead
 Action 9 -  Compose the variable to use as an input on Action 10 step  
 Action 10 -  In **Sharepoint**, update JSON file content with Action 9 output   
 
-*Important: Power Automate HTTP URL is generated after the first save, then it is necessary to copy it and paste it into the RD Station webhook configuration.*
+*Important: Power Automate HTTP URL is generated after the first save, then it is necessary to copy it and paste it into the RD Station webhook configuration:*  
+  
+![Webhook configuration](./README/images/webhook-config.png)
