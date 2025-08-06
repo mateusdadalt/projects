@@ -56,7 +56,7 @@ Action 10 -  In **Sharepoint**, update JSON file content with Action 9 output
 #### Report building
 
 #### Report publishing
-This model is currently set to update once a day. However, if real-time report were required
+This model is currently set to update once a day. However, if real-time report were required, a Power BI model update step could be added to the Power Automate flow as Action 11.
 
 ### Implemented Features
 Real time integration  
