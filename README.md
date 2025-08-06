@@ -2,6 +2,10 @@
 ### Lead capture tool with Power Automate, Sharepoint and Power BI
 This Power BI report queries a JSON file containing lead data, which is generated via a **webhook** integration between **RD Station** and **Power Automate**. The automated flow stores new leads in a **Sharepoint** folder, creating a dynamic and queryable database for reporting purposes.
 
+```
+Note: Due to confidentiality, no original files are published. All visual content is anonymized or blurred for privacy purposes.
+```
+
 ### Context and goal
 The company launched a marketing campaign for an educational course. A subscription form created using RD Station was embbeded on a landing page. Project stakeholders needed to monitor the campaign's performance and access a centralized, shareable lead database with access control. 
 
@@ -30,3 +34,33 @@ Action 10 -  In **Sharepoint**, update JSON file content with Action 9 output
 *Important: Power Automate HTTP URL is generated after the first save, then it is necessary to copy it and paste it into the RD Station webhook configuration:*  
   
 ![Webhook configuration](./README/images/webhook-config.png)
+
+<details>
+<summary> Webhook schema + Power Automate expressions </summary>
+
+```json
+{
+  "Date": "@{utcNow()}",
+  "E-mail": "@{triggerBody()?['leads']?[0]?['email']}",
+  "Name": "@{triggerBody()?['leads']?[0]?['first_conversion']?['content']?['__cdp__original_event']?['payload']?['name']}",
+  "Surname": "@{triggerBody()?['leads']?[0]?['first_conversion']?['content']?['__cdp__original_event']?['payload']?['cf_sobrenome']}",
+  "Telephone": "@{triggerBody()?['leads']?[0]?['first_conversion']?['content']?['__cdp__original_event']?['payload']?['mobile_phone']}",
+  "City": "@{triggerBody()?['leads']?[0]?['first_conversion']?['content']?['__cdp__original_event']?['payload']?['city']}",
+  "State": "@{triggerBody()?['leads']?[0]?['first_conversion']?['content']?['__cdp__original_event']?['payload']?['state']}"
+}
+```
+</details>
+
+### Power BI
+#### ETL: Power Query 
+#### Report building
+
+#### Report publishing
+This model is currently set to update once a day. However, if real-time report were required
+
+### Implemented Features
+Real time integration  
+Automatic storage and update  
+Centralized report  
+
+### Business impact
