@@ -21,10 +21,10 @@ Action 2 - An HTTP request is sent to the defined URL
 Trigger 3 - *Power Automate* receives the HTTP request  
 Action 4 -  Retrieve the current leads database JSON file from *Sharepoint*  
 Action 5 -  Convert JSON file content into structured data  
-Action 6 -  Initialize an array variable (Database) to store *Action 5* output  
-Action 7 -  Compose data from *Trigger 3* output into JSON file schema  
+Action 6 -  Initialize an array variable named "Database" to store Action 5 output  
+Action 7 -  Compose data from Trigger 3 output into JSON file schema  
 Action 8 -  Update Database variable adding the new lead  
-Action 9 -  Compose the variable to be able to use as an input on *Action 10* step  
-Action 10 -  In *Sharepoint*, update JSON file content with *Action 9* output   
+Action 9 -  Compose the variable to use as an input on Action 10 step  
+Action 10 -  In *Sharepoint*, update JSON file content with Action 9 output   
 
-<small>*Important: Power Automate URL is created after the first time it is saved. So it is necessary to copy it and *</small>
+*Important: Power Automate HTTP URL is generated after the first save, then it is necessary to copy it and paste it into the RD Station webhook configuration.*
