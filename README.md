@@ -114,29 +114,28 @@ in
 Each canvas background was created in Figma.
 
 #### Cover page
-I always use the cover page to display the model metadata, as it is often the user's landing page. All report cover pages are designed consistently, ensuring a professional and user-friendly experience.
-
-*Logos and company data have been blurred*   
-
-![Model](./README/images/Cover%20page.png)
+I always use the cover page to display the model metadata, as it is often the user's landing page. All report cover pages are designed consistently, ensuring a professional and user-friendly experience.  
+![Model](./README/images/Cover%20page.png)  
+*Logos and company data have been blurred.*  
 
 ### Rules panel
-In my projects, the first layer on every page is a rules panel pop-up. This ensures that users are aware of this feature. It is extremly important, not only for users but also for the support team. 
+In my projects, the first layer on every page is a rules panel pop-up. This ensures that users are aware of this feature. It is extremly important, not only for users but also for the support team.  
 ![Model](./README/images/Rules%20panel.png)  
-*Logos and company data have been blurred* 
+*Logos and company data have been blurred.* 
 
 #### Support button
-There are support buttons on the page as well. They redirect users to the support channel in a Teams chat. 
+There are support buttons on the page as well. They redirect users to the support channel in a Teams chat.  
 ![Model](./README/images/Support%20button.png)  
-*Logos and company data have been blurred* 
+*Logos and company data have been blurred.*  
 
 ### Main page
-In my projects, the 
+The key visual is the lead list. However, it is very important for the performance marketing team to monitor the lead's localization and submission date. This helps them to adjust their strategy or validate their current actions. For example, they can measure the impact of the investments over time.  
 ![Model](./README/images/Main%20page.png)  
-*Logos and company data have been blurred*  
+*Logos and company data have been blurred.*    
 
 #### Report publishing
-This model is currently set to update once a day. However, if real-time report were required, a Power BI model update step could be added to the Power Automate flow as Action 11.
+This model is currently set to update once a day. However, if real-time report were required, a Power BI model update step could be added to the Power Automate flow as Action 11.  
+The report is shared via the workspace app.  
 
 ### Implemented Features
 Real time integration  
@@ -144,9 +143,9 @@ Automatic storage and update
 Centralized report  
 
 ### Business impact
-1) Automated the lead registration process for a nationwide marketing campaign.
-2) Eliminated the need for manual spreadsheet maintenance.
-3) Enabled real-time reporting and sharing across teams.
-4) Reduced operational dependency on third-party software or consultants.
-5) Helped the organization avoid hiring an external BI service, saving operational costs.  
+1) Automated the lead registration process for a nationwide marketing campaign.  
+2) Eliminated the need for manual spreadsheet maintenance.  
+3) Enabled real-time reporting and sharing across teams.  
+4) Reduced operational dependency on third-party software or consultants.  
+5) Helped the organization avoid hiring an external BI service, saving operational costs.    
 
