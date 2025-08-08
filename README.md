@@ -130,7 +130,7 @@ There are support buttons on the page as well. They redirect users to the suppor
 
 ### Main page
 The key visual is the lead list. However, it is very important for the performance marketing team to monitor the lead's localization and submission date. This helps them to adjust their strategy or validate their current actions. For example, they can measure the impact of the investments over time.  
-![Model](./README/images/Main%20page.png)  
+![Model](./README/images/Group%205.png)  
 *Logos and company data have been blurred.*    
 
 #### Report publishing
