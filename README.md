@@ -109,6 +109,32 @@ in
 #### Model
 ![Model](./README/images/Model.JPG)
 
+### Report building
+
+Each canvas background was created in Figma.
+
+#### Cover page
+I always use the cover page to display the model metadata, as it is often the user's landing page. All report cover pages are designed consistently, ensuring a professional and user-friendly experience.
+
+*Logos and company data have been blurred*   
+
+![Model](./README/images/Cover%20page.png)
+
+### Rules panel
+In my projects, the first layer on every page is a rules panel pop-up. This ensures that users are aware of this feature. It is extremly important, not only for users but also for the support team. 
+![Model](./README/images/Rules%20panel.png)  
+*Logos and company data have been blurred* 
+
+#### Support button
+There are support buttons on the page as well. They redirect users to the support channel in a Teams chat. 
+![Model](./README/images/Support%20button.png)  
+*Logos and company data have been blurred* 
+
+### Main page
+In my projects, the 
+![Model](./README/images/Main%20page.png)  
+*Logos and company data have been blurred*  
+
 #### Report publishing
 This model is currently set to update once a day. However, if real-time report were required, a Power BI model update step could be added to the Power Automate flow as Action 11.
 
