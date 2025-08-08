@@ -2,11 +2,17 @@
 ### Lead capture tool with Power Automate, Sharepoint and Power BI
 This Power BI report queries a JSON file containing lead data, which is generated via a **webhook** integration between **RD Station** and **Power Automate**. The automated flow stores new leads in a **Sharepoint** folder, creating a dynamic and queryable database for reporting purposes.
 
-*Note: Due to confidentiality, no original files are published. All visual content is anonymized or blurred for privacy purposes.*
-
+*Note 1: Due to confidentiality, no original files are published. All visual content is anonymized or blurred for privacy purposes.*  
+*Note 2: The project was originally built in Portuguese, but it has been translated.*
 
 ### Context and goal
 The company launched a marketing campaign for an educational course. A subscription form created using RD Station was embbeded on a landing page. Project stakeholders needed to monitor the campaign's performance and access a centralized, shareable lead database with access control. 
+
+#### Important business rules
+Stakeholders defined a few business rules:
+1) The model only needs to refreshe once a day, around 08:00 AM.
+2) It is possible to submit the form more than once. Only the lastest form submission from each lead counts.
+3) E-mail is used as the lead ID.
 
 ### Architecture and workflow
 #### Database creation
@@ -34,7 +40,7 @@ Action 10 -  In **Sharepoint**, update JSON file content with Action 9 output
   
 ![Webhook configuration](./README/images/webhook-config.png)
 
-<details>
+<details open>
 <summary> Webhook schema + Power Automate expressions </summary>
 
 ```json
@@ -43,7 +49,7 @@ Action 10 -  In **Sharepoint**, update JSON file content with Action 9 output
   "E-mail": "@{triggerBody()?['leads']?[0]?['email']}",
   "Name": "@{triggerBody()?['leads']?[0]?['first_conversion']?['content']?['__cdp__original_event']?['payload']?['name']}",
   "Surname": "@{triggerBody()?['leads']?[0]?['first_conversion']?['content']?['__cdp__original_event']?['payload']?['cf_sobrenome']}",
-  "Telephone": "@{triggerBody()?['leads']?[0]?['first_conversion']?['content']?['__cdp__original_event']?['payload']?['mobile_phone']}",
+  "Mobile": "@{triggerBody()?['leads']?[0]?['first_conversion']?['content']?['__cdp__original_event']?['payload']?['mobile_phone']}",
   "City": "@{triggerBody()?['leads']?[0]?['first_conversion']?['content']?['__cdp__original_event']?['payload']?['city']}",
   "State": "@{triggerBody()?['leads']?[0]?['first_conversion']?['content']?['__cdp__original_event']?['payload']?['state']}"
 }
@@ -51,8 +57,57 @@ Action 10 -  In **Sharepoint**, update JSON file content with Action 9 output
 </details>
 
 ### Power BI
-#### ETL: Power Query 
-#### Report building
+This is a straightfoward Power BI project. Due to the model's simplicity, few queries, measures, and relationships are necessary. Nevertheless, there are relevant good practices that should be highlighted. 
+
+#### ETL: Power Query
+
+It is a very simple ETL process. There are two dimension tables and one fact table in this model. Describing the ETL process for both the calendar and city dimension tables is not relevant.
+
+<details open>
+<summary> Leads fact table M script </summary>
+  
+```m
+  let
+    Source = SharePoint.Files("SHAREPOINT SITE URL", [ApiVersion = 15]),
+    
+    Folder = Source{[Name="LEAD FILE.json",#"Folder Path"="SHAREPOINT FOLDER URL"]}[Content],
+    
+    JSON = Json.Document(Folder,TextEncoding.Utf8),
+    
+    //It is recommended to use Table.FromRecords expression instead of built-in functions because it expands all columns withouh needing to specify them. If a column is removed from the JSON file, this step will not cause a refresh failure.
+    
+    Expand = Table.FromRecords(JSON),
+    
+    #"Renamed Columns" = Table.RenameColumns(Expand,{{"Data", "Date"}, {"Nome", "Name"}, {"Sobrenome", "Surname"}, {"Telefone", "Mobile"}, {"Cidade", "City"}, {"Estado", "State"}}),
+
+    //Using the following expression, only 1 step is necessary to convert a datetime type into a date type.
+    #"Changed Type" = Table.TransformColumns(#"Renamed Columns",{{"Date", each Date.From(DateTimeZone.From(_)), type date}, {"Name", each _, type text}, {"Surname", each _, type text}, {"Mobile", each _, type text}, {"City", each _, type text}, {"State", each _, type text}, {"E-mail", each _, type text}}),
+    
+    // As stated by stakeholders, only the last submit per lead is relevant. Next two steps ensure this. 
+    // Table.Buffer is necessary to sort all rows by submission date before removing duplicates.
+    #"Sorted Rows" = Table.Buffer(Table.Sort(#"Changed Type",{{"Date", Order.Descending}})),
+
+    // E-mail is the lead ID
+    #"Removed Duplicates" = Table.Distinct(#"Sorted Rows", {"E-mail"}),
+    
+    #"Inserted Merged Column" = Table.AddColumn(#"Removed Duplicates", "Full name", each Text.Combine({[Name], [Surname]}, " "), type text),
+    
+    #"Merged Columns" = Table.CombineColumns(#"Inserted Merged Column",{"State", "City"},Combiner.CombineTextByDelimiter(" - ", QuoteStyle.None),"State and city"),
+    
+    #"Replaced Value" = Table.ReplaceValue(#"Merged Columns","+55 ","",Replacer.ReplaceText,{"Mobile"}),
+    
+    #"Removed Other Columns" = Table.SelectColumns(#"Replaced Value",{"Date", "Full name", "E-mail", "Mobile", "State and city"}),
+    
+    #"Capitalized Each Word" = Table.TransformColumns(#"Removed Other Columns",{{"Full name", Text.Proper, type text}})
+
+in
+    
+    #"Capitalized Each Word"
+```
+</details>
+
+#### Model
+
 
 #### Report publishing
 This model is currently set to update once a day. However, if real-time report were required, a Power BI model update step could be added to the Power Automate flow as Action 11.
@@ -63,3 +118,9 @@ Automatic storage and update
 Centralized report  
 
 ### Business impact
+1) Automated the lead registration process for a nationwide marketing campaign.
+2) Eliminated the need for manual spreadsheet maintenance.
+3) Enabled real-time reporting and sharing across teams.
+4) Reduced operational dependency on third-party software or consultants.
+5) Helped the organization avoid hiring an external BI service, saving operational costs.  
+
