@@ -42,16 +42,16 @@ Action 10 -  In **Sharepoint**, update JSON file content with Action 9 output
 
 <details open>
 <summary> Webhook schema + Power Automate expressions </summary>
-
+  
 ```json
 {
   "Date": "@{utcNow()}",
   "E-mail": "@{triggerBody()?['leads']?[0]?['email']}",
   "Name": "@{triggerBody()?['leads']?[0]?['first_conversion']?['content']?['__cdp__original_event']?['payload']?['name']}",
-  "Surname": "@{triggerBody()?['leads']?[0]?['first_conversion']?['content']?['__cdp__original_event']?['payload']?['cf_sobrenome']}",
-  "Mobile": "@{triggerBody()?['leads']?[0]?['first_conversion']?['content']?['__cdp__original_event']?['payload']?['mobile_phone']}",
-  "City": "@{triggerBody()?['leads']?[0]?['first_conversion']?['content']?['__cdp__original_event']?['payload']?['city']}",
-  "State": "@{triggerBody()?['leads']?[0]?['first_conversion']?['content']?['__cdp__original_event']?['payload']?['state']}"
+  "Surname": "@{triggerBody()?['leads']?[0]?['last_conversion']?['content']?['__cdp__original_event']?['payload']?['cf_sobrenome']}",
+  "Mobile": "@{triggerBody()?['leads']?[0]?['last_conversion']?['content']?['__cdp__original_event']?['payload']?['mobile_phone']}",
+  "City": "@{triggerBody()?['leads']?[0]?['last_conversion']?['content']?['__cdp__original_event']?['payload']?['city']}",
+  "State": "@{triggerBody()?['leads']?[0]?['last_conversion']?['content']?['__cdp__original_event']?['payload']?['state']}"
 }
 ```
 </details>
